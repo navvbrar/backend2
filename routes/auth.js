@@ -5,7 +5,7 @@ const express= require("express");
   const isadmin= require("../middleware/admin");
 const { matchpassword } = require("../controllers/usercontroller");
 const auth = require("../middleware/auth");
-  router.post("/",auth,login)
+  router.post("/",login)
   router.put("/",matchpassword)
 
 
