@@ -8,10 +8,10 @@ const addtocart = async(req,res,next)=>{
 try{
  await validation.addtocart(req.body,res)
 const{product_id,size,quantity}=req.body;
-  const product_info = product.findById(product_id);
+  const product_info = await product.findById(product_id);
  if(product_info.stock<quantity){
   return res.json({
-    success:fals,
+    success:false,
     message:"thier is not enough stock"
   })
   
