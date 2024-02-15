@@ -30,6 +30,14 @@ today = mm + '/' + dd + '/' + yyyy;
      totalprice += usercart[i].quantity * usercart[i].product_id[0].price
      total_each_item = usercart[i].quantity * usercart[i].product_id[0].price
      const product_info = await product.findById(usercart[i].product_id[0])
+     if(product_info.stock<usercart[i].quantity){
+       res.json({
+      message:` the product with name ${product_info.name} and id ${usercart[i].product_id[0]} have not enough stock`,
+      success:false,
+       })
+       continue;
+     }
+     
      order_status = await new orderstatus({
       ordered: true,
       shipped:false,

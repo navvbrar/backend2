@@ -1,4 +1,5 @@
 const cart = require("../models/cartmodel");
+const product = require("../models/product");
 const joi = require("joi");
 const validation = require("../validation.js/cartvalidation");
 const responsehelper = require("../helpers.js/responsehelpers");
@@ -7,7 +8,14 @@ const addtocart = async(req,res,next)=>{
 try{
  await validation.addtocart(req.body,res)
 const{product_id,size,quantity}=req.body;
- 
+  const product_info = product.findById(product_id);
+ if(product_info.stock<quantity){
+  return res.json({
+    success:fals,
+    message:"thier is not enough stock"
+  })
+  
+ }
 
 const  item =await  new cart({product_id,user_id:req.body.authuser.id,size,quantity})
   await item.save();
