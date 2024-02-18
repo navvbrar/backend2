@@ -85,10 +85,19 @@ const deleteitem=async(req,res,next)=>{
 
 const updateitem= async(req,res,next)=>{
  try{
+  const getcart = await cart.findById(req.params.id);
+  console.log(getcart)
+  const stock = getcart.product_id[0].stock;
+  if(stock<req.body.quantity){
+  return res.json({
+     success:false,
+     message:"not enough stock"
+  })
+
+  }
    const item = await cart.findByIdAndUpdate(req.params.id,{quantity:req.body.quantity},{new:true});
    await item.save()
    const fullcart= await cart.find({user_id:req.body.authuser.id}).populate("product_id");
-   console.log(fullcart[0])
    
    let totalprice =0;
    for(let i=0;i<fullcart.length;i++){
