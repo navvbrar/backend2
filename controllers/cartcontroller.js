@@ -86,7 +86,7 @@ const deleteitem=async(req,res,next)=>{
 
 const updateitem= async(req,res,next)=>{
  try{
-  const getcart = await cart.findById(req.params.id);
+  const getcart = await cart.findById(req.params.id).populate("product_id");
   console .log("this is cart" + getcart)
   const stock = getcart.product_id[0].stock;
   console.log("this is stock"+ stock)
