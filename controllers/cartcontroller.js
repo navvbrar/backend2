@@ -3,6 +3,7 @@ const product = require("../models/product");
 const joi = require("joi");
 const validation = require("../validation.js/cartvalidation");
 const responsehelper = require("../helpers.js/responsehelpers");
+const { get } = require("mongoose");
 
 const addtocart = async(req,res,next)=>{
 try{
@@ -86,9 +87,10 @@ const deleteitem=async(req,res,next)=>{
 const updateitem= async(req,res,next)=>{
  try{
   const getcart = await cart.findById(req.params.id);
-  
+  console .log("this is cart" + getcart)
   const stock = getcart.product_id[0].stock;
-  console.log(stock)
+  console.log("this is stock"+ stock)
+ 
   if(stock<req.body.quantity){
   return res.json({
      success:false,
