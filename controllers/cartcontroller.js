@@ -86,8 +86,9 @@ const deleteitem=async(req,res,next)=>{
 const updateitem= async(req,res,next)=>{
  try{
   const getcart = await cart.findById(req.params.id);
-  console.log(getcart)
+  
   const stock = getcart.product_id[0].stock;
+  console.log(stock)
   if(stock<req.body.quantity){
   return res.json({
      success:false,
