@@ -74,12 +74,14 @@ today = mm + '/' + dd + '/' + yyyy;
    
 
  
-  let end_total  = totalprice + (totalprice/100)*13
+  let end_total  =parseFloat(  (totalprice + (totalprice/100)*13).toFixed(2)  )
+
    let email = req.body.email
  await ordermails.ordersuccess(email,neworder._id,end_total)
   res.status(200).json({
     success:true,
-    neworder
+    neworder,
+    end_total
     
   })}
    catch(err){
