@@ -50,7 +50,7 @@ try{
       grossprice += getitems[i].quantity * getitems[i].product_id[0].price
       
    }
- let tax = (grossprice/100)*6
+ let tax = (grossprice/100)*13
  tax = parseFloat(tax.toFixed(2))
  let totalprice = grossprice + tax
  
@@ -87,9 +87,9 @@ const deleteitem=async(req,res,next)=>{
 const updateitem= async(req,res,next)=>{
  try{
   const getcart = await cart.findById(req.params.id).populate("product_id");
-  console .log("this is cart" + getcart)
+  
   const stock = getcart.product_id[0].stock;
-  console.log("this is stock"+ stock)
+  
  
   if(stock<req.body.quantity){
   return res.json({

@@ -26,9 +26,11 @@ today = mm + '/' + dd + '/' + yyyy;
    var neworder
    let totalprice=0;
    var order_status
+   var total_with_tax =0
    for(let i=0;i<usercart.length;i++){
      totalprice += usercart[i].quantity * usercart[i].product_id[0].price
      total_each_item = usercart[i].quantity * usercart[i].product_id[0].price
+      total_with_tax = total_each_item + (total_each_item/100)*13
      const product_info = await product.findById(usercart[i].product_id[0])
      if(product_info.stock<usercart[i].quantity){
        res.json({
@@ -55,7 +57,7 @@ today = mm + '/' + dd + '/' + yyyy;
       state:req.body.state,
       zipcode:req.body.zipcode,
       country:req.body.country,
-      total:total_each_item,
+      total:total_with_tax,
       cartdata:usercart[i],
       product_info:product_info,
       user_id:req.body.authuser.id ,
@@ -72,9 +74,9 @@ today = mm + '/' + dd + '/' + yyyy;
    
 
  
-  
- let email = req.body.email
- await ordermails.ordersuccess(email,neworder._id,req.body.totalprice)
+  let end_total  = totalprice + (totalprice/100)*13
+   let email = req.body.email
+ await ordermails.ordersuccess(email,neworder._id,end_total)
   res.status(200).json({
     success:true,
     neworder

@@ -26,6 +26,7 @@ app.use("/api/search", require("./routes/search.js"))
 app.use("/api/order", require("./routes/orderroutes.js"))
 app.use("/api/review",require("./routes/reviewroutes.js"))
 app.use("/api/promotion",require("./routes/promotionroute.js"))
+app.use("/api/session", require("./routes/payment.js"))
 
 app.listen(port, (req, res) => {
 
