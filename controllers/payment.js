@@ -1,7 +1,7 @@
 
 
 const stripe = require("stripe")("sk_test_51P9qNQRoymbVDp1j7shH06N8Srw0Ymivs6oPepAX3cEPLNJ7ZtDkaY0nAsMdf3WRAv3jSvUFaWMiifzCPazNBo4C00wEn8nE9x")
- const YOUR_DOMAIN="http://localhost:3000"
+ const YOUR_DOMAIN="https://frontend-six-tau-40.vercel.app"
 
 const payments = async (req,res)=>{
     try{
