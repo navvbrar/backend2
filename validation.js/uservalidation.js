@@ -8,11 +8,6 @@
         email: joi.string()
           .email().required(),
           phonenumber:joi.number().max(1000000000000).required(),
-          username: joi.string()
-          .alphanum()
-          .min(5)
-          .max(15)
-          .required(),
           password: joi.string().min(4)
         })
         return schema.validateAsync(data)

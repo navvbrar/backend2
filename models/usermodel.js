@@ -18,13 +18,6 @@ const userschema = mongoose.Schema({
   type:Number,
   required:true
    },
-   username:{
-   type:String,
-   required:true,
-   minLength:5,
-   maxLength:15
-
-   },
    password:{
     type:String,
     required:true,

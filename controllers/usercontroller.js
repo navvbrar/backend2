@@ -11,7 +11,7 @@ const ordermails = require("../email.js/orderemail");
 const adduser =async(req,res,next)=>{
   try{
    await validation.adduser(req.body,res) 
-  const{name,email,phonenumber,password,username} = req.body;
+  const{name,email,phonenumber,password} = req.body;
   const salt = await bcrypt.genSalt(10);
   const hashpassword =await bcrypt.hash(password,salt);
   const userexists = await user.findOne({email:email})
@@ -19,7 +19,7 @@ const adduser =async(req,res,next)=>{
     return responsehelper.errorresponse("validation error",res)
   }
   const newuser =await  new user({
-    name,email,phonenumber,password:hashpassword,username
+    name,email,phonenumber,password:hashpassword
   })
   newuser.save();
   const data ={
